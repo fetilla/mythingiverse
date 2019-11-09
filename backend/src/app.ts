@@ -11,6 +11,6 @@ const apolloConfig: Config = {
 const server = new ApolloServer(apolloConfig);
 
 // Start the server
-server.listen(3000, () => {
+server.listen(4000, () => {
   console.log('App listening');
 });
