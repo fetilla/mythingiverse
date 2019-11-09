@@ -17,7 +17,8 @@
     "apollo-server": "^2.9.7",
     "graphql": "^14.5.8",
     "graphql-tools": "^4.0.6",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "typed-rest-client": "^1.0.3"
   },
   "devDependencies": {
     "@types/express": "^4.17.2",

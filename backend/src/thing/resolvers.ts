@@ -1,4 +1,4 @@
-import typeDefThing from './typeDef';
+import thingTypeDef from './typeDef';
 import { getPopular } from './client';
 
 export default {
@@ -6,7 +6,7 @@ export default {
     Query: {
       popular: () => getPopular(),
     },
+    Mutation: {},
   },
-  Mutation: {},
-  typeDefs: [typeDefThing],
+  typeDefs: [thingTypeDef],
 };

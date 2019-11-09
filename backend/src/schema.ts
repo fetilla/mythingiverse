@@ -1,6 +1,7 @@
 import { gql, IExecutableSchemaDefinition } from 'apollo-server';
 import { isArray, mergeWith } from 'lodash';
 import  thingResolvers  from './thing/resolvers';
+import  authResolvers  from './auth/resolvers';
 
 // create our schema
 function withArraysConcatenation(objValue:any, srcValue:any) {
@@ -39,6 +40,7 @@ export const rawSchemas = mergeRawSchemas(
     resolvers: {},
   },
   thingResolvers,
+  authResolvers,
 );
 
 export let schema = rawSchemas.typeDefs;
