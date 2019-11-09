@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router';
 import AuthStorage from './AuthStorage';
 import { observer } from 'mobx-react';
+import * as _ from 'lodash';
 
 @observer
 export class Auth extends Component {
@@ -12,9 +13,9 @@ export class Auth extends Component {
 
   public render() {
     let code = this.extractCodeFromUrl();
-    if(AuthStorage.token == null && code != null){
-      AuthStorage.token = code!
-    } else if(AuthStorage.token == null ) {
+    if(_.isNil(AuthStorage.code_retrieved) && !_.isNil(code)){
+      AuthStorage.code_retrieved = code!
+    } else if(_.isNil(AuthStorage.code_retrieved)) {
       this.redirectToExternalAuth();
     }
     return (

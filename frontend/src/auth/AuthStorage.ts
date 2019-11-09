@@ -11,15 +11,15 @@ class AuthStorage {
 
   private _response_type = 'code';
 
-  @observable private _token: string;
+  @observable private _code_retrieved: string;
 
   @computed
-  get token(): string {
-    return this._token;
+  get code_retrieved(): string {
+    return this._code_retrieved;
   }
 
-  set token(value: string) {
-    this._token = value;
+  set code_retrieved(value: string) {
+    this._code_retrieved = value;
   }
 
   get clientId(): string {
