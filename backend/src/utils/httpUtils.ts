@@ -8,12 +8,13 @@ export const httpClient: httpm.HttpClient = new httpm.HttpClient('typed-rest-cli
 
 export const AuthenticationHeader = (bearer: string) => {
   return {
-    'Authorization': `Bearer ${bearer}`
+    'Authorization': `${bearer}`,
+    'Content-Type': 'application/json'
   }
 }
 
 export const contentTypeUrlEncodedHeader = () => {
   return {
-    'content-type': 'application/x-www-form-urlencoded'
+    'Content-Type': 'application/x-www-form-urlencoded'
   }
 }

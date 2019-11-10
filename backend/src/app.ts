@@ -6,7 +6,12 @@ let schemas = makeExecutableSchema(graphqlSchemas);
 
 const apolloConfig: Config = {
   schema: schemas,
-}
+  context: ({ req }) => {
+    const token = req.headers.authorization || '';
+
+    return { token };
+  }
+};
 
 const server = new ApolloServer(apolloConfig);
 

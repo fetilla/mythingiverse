@@ -1,10 +1,10 @@
 import thingTypeDef from './typeDef';
-import { getPopular } from './client';
+import { thingsRequest } from './client';
 
 export default {
   resolvers: {
     Query: {
-      popular: (root, args, context) => getPopular(root, args, context),
+      thingQuery: (root, args, context) => thingsRequest(context.token),
     },
     Mutation: {},
   },

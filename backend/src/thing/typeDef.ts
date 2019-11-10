@@ -24,7 +24,7 @@ const typeDef = gql`
   },
   
   extend type Query {
-    popular: [Thing]
+    thingQuery: [Thing]
   }
 `;
 
