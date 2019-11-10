@@ -12,7 +12,7 @@ export class AuthExternal extends Component {
 
   public render() {
     if (_.isNil(AuthStorage.bearer_token)) {
-      //this.redirectToExternalAuth();
+      this.redirectToExternalAuth();
     }
     return (
       <div/>

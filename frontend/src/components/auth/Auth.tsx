@@ -1,40 +1,49 @@
 import React, { Component } from 'react';
 import AuthStorage from './AuthStorage';
-import * as _ from 'lodash';
-import { retrieveToken } from './authService';
 import history from '../../navigation/history';
+import * as _ from 'lodash';
+import { Mutation } from '@apollo/react-components';
+import gql from 'graphql-tag';
 
+const GET_AUTH_TOKEN = gql`
+  mutation validateCodeGetToken($token: String!) {
+    validateCodeGetToken(token: $token){
+      token
+    }
+  }
+`;
+
+interface AuthToken {
+  token: string
+}
+
+const ValidateToken = () => <Mutation<AuthToken, AuthToken> mutation={GET_AUTH_TOKEN}>
+  {(authToken, { loading, data, error }) => {
+    if(!loading) {
+      if (!_.isNil(data) && !_.isNil(data.token)) {
+        AuthStorage.bearer_token = data.token;
+        history.push('/popular');
+      } else {
+        authToken({variables: {token: extractCodeFromUrl()!}});
+      }
+    }
+    return <div/>;
+  }}
+</Mutation>
+
+const Authenticate = () =>
+{return _.isNil(AuthStorage.bearer_token) ? <ValidateToken/> : <div/>}
+
+const extractCodeFromUrl = () => {
+  var urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('code');
+}
 
 export class Auth extends Component {
 
-  constructor(props: any) {
-    super(props);
-  }
-
   public render() {
-    AuthStorage.bearer_token = 'aaa';
-    let tokenRetrieved = retrieveToken(this.extractCodeFromUrl()!)
-
-    if (!_.isNil(tokenRetrieved)) {
-      AuthStorage.bearer_token = tokenRetrieved;
-      history.push('/popular');
-    }
     return (
-      <div/>
+      <Authenticate/>
     );
-  }
-
-  private authenticationFlow() {
-    let tokenRetrieved = retrieveToken(this.extractCodeFromUrl()!)
-
-    if (!_.isNil(tokenRetrieved)) {
-      AuthStorage.bearer_token = tokenRetrieved;
-      history.push('/popular');
-    }
-  }
-
-  private extractCodeFromUrl() {
-    var urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('code');
   }
 }
