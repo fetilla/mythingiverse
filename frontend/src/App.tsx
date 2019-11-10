@@ -7,9 +7,18 @@ import Routes from './navigation/Routes';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import { Auth } from './components/auth/Auth';
+import AuthStorage from './components/auth/AuthStorage';
+import { observer } from 'mobx-react';
 
 export const client = new ApolloClient({
   uri: 'http://localhost:4000',
+  request: (operation) => {
+    operation.setContext({
+      headers: {
+        authorization: AuthStorage.bearer_token ? `Bearer ${AuthStorage.bearer_token}` : ''
+      }
+    })
+  }
 });
 
 class App extends Component {

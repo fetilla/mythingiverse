@@ -1,11 +1,10 @@
 import { Mutation } from '@apollo/react-components';
-import * as _ from 'lodash';
 import AuthStorage from './AuthStorage';
-import history from '../../navigation/history';
 import React from 'react';
 import gql from 'graphql-tag';
+import history  from '../../navigation/history'
 
-const GET_AUTH_TOKEN = gql`
+const VALIDATE_TOKEN_MUTATION = gql`
   mutation validateCodeGetToken($token: String!) {
     validateCodeGetToken(token: $token){
       token
@@ -14,30 +13,30 @@ const GET_AUTH_TOKEN = gql`
 `;
 
 interface ValidateCodeGetToken {
-  token: string
+  token: string;
 }
 
 interface AuthToken {
-  validateCodeGetToken: ValidateCodeGetToken
+  validateCodeGetToken: ValidateCodeGetToken;
 }
 
 
-const ValidateToken = () => <Mutation<AuthToken, ValidateCodeGetToken> mutation={GET_AUTH_TOKEN}>
+const ValidateToken = () => <Mutation<AuthToken, ValidateCodeGetToken> mutation={VALIDATE_TOKEN_MUTATION}>
   {(authToken, { loading, data, error }) => {
-    if(!loading) {
-      if(_.isNil(data)){
+    if(loading) return <p>Authentication in process...</p>;
+    if(error) return <p>Error authentication</p>;
+    if(!data){
         authToken({variables: {token: extractCodeFromUrl()!}});
-      } else if (!_.isNil(data.validateCodeGetToken.token)){
-        AuthStorage.bearer_token = data.validateCodeGetToken.token;
-      }
+    } else if (data.validateCodeGetToken.token){
+      AuthStorage.bearer_token = data.validateCodeGetToken.token;
     }
     return <div/>;
   }}
 </Mutation>
 
 const extractCodeFromUrl = () => {
-  var urlParams = new URLSearchParams(window.location.search);
+  const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get('code');
 }
 
-export {extractCodeFromUrl, ValidateToken}
+export {extractCodeFromUrl, ValidateToken};

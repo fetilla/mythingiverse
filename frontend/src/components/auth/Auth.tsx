@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import AuthStorage from './AuthStorage';
-import * as _ from 'lodash';
 import { RedirectAuth } from './RedirectAuth';
 import { extractCodeFromUrl, ValidateToken } from './ValidateToken';
 import { observer } from 'mobx-react';
@@ -8,9 +7,9 @@ import { AuthToken } from '../../../../backend/src/auth/AuthToken';
 import { Popular } from '../popular/Popular';
 
 const AuthenticationFlow = (props: AuthToken) => {
-  if (!_.isNil(props.token)) {
+  if (props.token) {
     return <Popular/>;
-  } else if (_.isNil(AuthStorage.bearer_token) && !_.isNil(extractCodeFromUrl())) {
+  } else if (!AuthStorage.bearer_token && extractCodeFromUrl()) {
     return <ValidateToken/>;
   } else {
     return <RedirectAuth/>;
