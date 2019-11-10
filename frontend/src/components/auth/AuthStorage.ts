@@ -7,19 +7,19 @@ class AuthStorage {
 
   private _redirect_host = 'http://localhost:3000';
 
-  private _request_auth = 'https://www.thingiverse.com/login/oauth/authorize'
+  private _request_auth = 'https://www.thingiverse.com/login/oauth/authorize';
 
   private _response_type = 'code';
 
-  @observable private _code_retrieved: string;
+  @observable private _bearer_token: string;
 
   @computed
-  get code_retrieved(): string {
-    return this._code_retrieved;
+  get bearer_token(): string {
+    return this._bearer_token;
   }
 
-  set code_retrieved(value: string) {
-    this._code_retrieved = value;
+  set bearer_token(value: string) {
+    this._bearer_token = value;
   }
 
   get clientId(): string {

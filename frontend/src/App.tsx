@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Header } from './header/Headers';
+import { Header } from './components/header/Headers';
 import { Router } from 'react-router-dom';
 import history from './navigation/history';
 import Routes from './navigation/Routes';
-import { Auth } from './auth/Auth';
+import { AuthExternal } from './components/auth/AuthExternal';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 
@@ -19,7 +19,7 @@ class App extends Component {
       <ApolloProvider client={client}>
         <div className="App">
           <Header/>
-          <Auth/>
+          <AuthExternal/>
           <Router history={history}>
             <Routes/>
           </Router>

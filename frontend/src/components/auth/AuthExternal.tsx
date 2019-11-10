@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
-import { RouteComponentProps } from 'react-router';
 import AuthStorage from './AuthStorage';
-import { observer } from 'mobx-react';
 import * as _ from 'lodash';
+import { observer } from 'mobx-react';
 
 @observer
-export class Auth extends Component {
+export class AuthExternal extends Component {
 
   constructor(props: any) {
     super(props);
   }
 
   public render() {
-    let code = this.extractCodeFromUrl();
-    if(_.isNil(AuthStorage.code_retrieved) && !_.isNil(code)){
-      AuthStorage.code_retrieved = code!
-    } else if(_.isNil(AuthStorage.code_retrieved)) {
-      this.redirectToExternalAuth();
+    if (_.isNil(AuthStorage.bearer_token)) {
+      //this.redirectToExternalAuth();
     }
     return (
       <div/>
