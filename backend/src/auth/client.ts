@@ -4,8 +4,8 @@ import { objectToURLEncoded } from '../utils/httpUtils';
 
 let httpClient: httpm.HttpClient = new httpm.HttpClient('typed-rest-client', []);
 
-const clientId: string = '4cba0d21d0b85e9cae68';
-const clientSecret: string = '3ae8c6a7600848c8467b5b2bdb6d382e';
+const clientId: string = 'f54c730466738f8e6607';
+const clientSecret: string = '8a63b6602e52b3b30c0ec341c2e2614b';
 
 interface TokenBody {
   client_id: string

@@ -1,7 +1,7 @@
 import { computed, observable } from 'mobx';
 
 class AuthStorage {
-  private _clientId = '4cba0d21d0b85e9cae68';
+  private _clientId = 'f54c730466738f8e6607';
 
   private _redirect_uri = '/token/answer';
 

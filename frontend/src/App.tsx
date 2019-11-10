@@ -4,9 +4,9 @@ import { Header } from './components/header/Headers';
 import { Router } from 'react-router-dom';
 import history from './navigation/history';
 import Routes from './navigation/Routes';
-import { AuthExternal } from './components/auth/AuthExternal';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
+import { Auth } from './components/auth/Auth';
 
 export const client = new ApolloClient({
   uri: 'http://localhost:4000',
@@ -19,7 +19,7 @@ class App extends Component {
       <ApolloProvider client={client}>
         <div className="App">
           <Header/>
-          <AuthExternal/>
+          <Auth/>
           <Router history={history}>
             <Routes/>
           </Router>
