@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import * as _ from 'lodash';
 
 interface AuthToken {
@@ -8,12 +8,12 @@ interface AuthToken {
 
 const GET_AUTH_TOKEN = gql`
   mutation validateCodeGetToken($token: String!) {
-    AuthToken
+    token
   }
 `;
 
 export function retrieveToken(code: string) {
-   let [authToken, { error, data }] = useMutation<AuthToken, AuthToken>(
+   let [authToken, { error, data }] = useMutation<{token: string}, AuthToken>(
     GET_AUTH_TOKEN,
     { variables: { token: code } }
   );
