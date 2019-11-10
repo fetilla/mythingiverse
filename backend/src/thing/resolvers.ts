@@ -4,7 +4,7 @@ import { getPopular } from './client';
 export default {
   resolvers: {
     Query: {
-      popular: () => getPopular(),
+      popular: (root, args, context) => getPopular(root, args, context),
     },
     Mutation: {},
   },

@@ -29,7 +29,6 @@ const ValidateToken = () => <Mutation<AuthToken, ValidateCodeGetToken> mutation=
         authToken({variables: {token: extractCodeFromUrl()!}});
       } else if (!_.isNil(data.validateCodeGetToken.token)){
         AuthStorage.bearer_token = data.validateCodeGetToken.token;
-        history.push('/popular');
       }
     }
     return <div/>;

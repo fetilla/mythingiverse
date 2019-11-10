@@ -6,20 +6,8 @@ export class Header extends React.Component {
   public render() {
     return (
       <div className="App-header">
-        <div className="topContainer">
-          <ul>
-            <li>
-              <button type="button" onClick={this.navigatePopular}>
-                Popular
-              </button>
-            </li>
-          </ul>
-        </div>
+        <div className="topContainer"/>
       </div>
     );
-  }
-
-  private navigatePopular = () => {
-    history.push('/popular');
   }
 }

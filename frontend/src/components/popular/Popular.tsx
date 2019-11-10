@@ -1,13 +1,39 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import gql from 'graphql-tag';
+
+const POPULAR_QUERY = gql`
+  mutation validateCodeGetToken($token: String!) {
+    validateCodeGetToken(token: $token){
+      token
+    }
+  }
+`;
+
+interface ValidateCodeGetToken {
+  token: string
+}
+
+interface AuthToken {
+  validateCodeGetToken: ValidateCodeGetToken
+}
+
 
 export class Popular extends React.Component {
   public render() {
     return (
-      <div>
-        <p>
-          Phasellus congue malesuada elit, in tincidunt ipsum condimentum ac. Suspendisse ac posuere ipsum, at finibus dolor. Vivamus id lorem dui. In varius pulvinar lorem at molestie. Praesent vestibulum dapibus ante in vulputate. Nulla semper diam a arcu lobortis mattis. Sed hendrerit congue nisi. Proin condimentum odio non magna placerat dignissim. Integer nisl diam, lobortis nec posuere in, lacinia a ipsum.
-        </p>
-      </div>
+      <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" src="holder.js/100px180" />
+        <Card.Body>
+          <Card.Title>Card Title</Card.Title>
+          <Card.Text>
+            Some quick example text to build on the card title and make up the bulk of
+            the card's content.
+          </Card.Text>
+          <Button variant="primary">Go somewhere</Button>
+        </Card.Body>
+      </Card>
     );
   }
 }
