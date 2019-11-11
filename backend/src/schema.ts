@@ -1,6 +1,7 @@
 import { gql, IExecutableSchemaDefinition } from 'apollo-server';
 import { isArray, mergeWith } from 'lodash';
 import  thingResolvers  from './thing/resolvers';
+import  dateResolvers from './utils/scalars/date/resolvers';
 import  authResolvers  from './auth/resolvers';
 
 // create our schema
@@ -24,7 +25,7 @@ export const rawSchemas = mergeRawSchemas(
     typeDefs: [
       // we create empty main types, we can later extend them in the shards
       gql`
-                 type Query {
+                type Query {
                     _empty: String
                 }
 
@@ -39,6 +40,7 @@ export const rawSchemas = mergeRawSchemas(
     ],
     resolvers: {},
   },
+  dateResolvers,
   thingResolvers,
   authResolvers,
 );
