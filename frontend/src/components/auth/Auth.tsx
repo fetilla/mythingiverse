@@ -4,17 +4,17 @@ import { RedirectAuth } from './RedirectAuth';
 import { extractCodeFromUrl, ValidateToken } from './ValidateToken';
 import { observer } from 'mobx-react';
 import { AuthToken } from '../../../../backend/src/auth/AuthToken';
-import { Popular } from '../popular/Popular';
+import { PopularThings } from '../popular/Popular';
 import  history from '../../navigation/history';
+import { Redirect, Route } from 'react-router';
 
 const AuthenticationFlow = (props: AuthToken) => {
   if (props.token) {
-    history.push('/popular');
-    return <Popular/>;
-  } else if (!AuthStorage.bearer_token && extractCodeFromUrl()) {
-    return <ValidateToken/>;
+    return <Redirect push={true} to={'/popular'} />;
+  } else if (!props.token && extractCodeFromUrl()) {
+    return <ValidateToken />;
   } else {
-    return <RedirectAuth/>;
+    return <RedirectAuth />;
   }
 }
 
@@ -23,7 +23,7 @@ export class Auth extends Component {
 
   public render() {
     return (
-      <AuthenticationFlow token={AuthStorage.bearer_token}/>
+      <AuthenticationFlow token={AuthStorage.bearer_token} />
     );
   }
 }

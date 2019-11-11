@@ -30,7 +30,7 @@ const ValidateToken = () => <Mutation<AuthToken, ValidateCodeGetToken> mutation=
     } else if (data.validateCodeGetToken.token){
       AuthStorage.bearer_token = data.validateCodeGetToken.token;
     }
-    return <div/>;
+    return null;
   }}
 </Mutation>
 

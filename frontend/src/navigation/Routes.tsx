@@ -1,15 +1,27 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { Auth } from '../components/auth/Auth';
 import AuthStorage from '../components/auth/AuthStorage';
-import { Popular } from '../components/popular/Popular';
+import { PopularThings } from '../components/popular/Popular';
+
+const PrivateRoute = (props: any) => <Route path={props.path} render={() => {
+  return AuthStorage.bearer_token ?
+    (props.children) :
+    (<Redirect to={'/'}/>)
+}} />;
 
 export default function Routes() {
   return (
     <Switch>
-      <Route path={'/'} render={() => Auth}/>
-      <Route path={AuthStorage.redirect_uri} render={() => Auth}/>
-      <Route path={'/popular'} render={() => Popular}/>
+      <PrivateRoute path={'/popular'}>
+        <PopularThings />
+      </PrivateRoute>
+      <Route path={AuthStorage.redirect_uri}>
+        <Auth />
+      </Route>
+      <Route exact={true} path={'/'}>
+        <Auth />
+      </Route>
     </Switch>
   );
 }

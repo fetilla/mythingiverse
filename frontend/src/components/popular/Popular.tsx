@@ -4,8 +4,9 @@ import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import gql from 'graphql-tag';
 import { Query } from '@apollo/react-components';
-import { CardColumns } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import './Popular.css';
+import Container from 'react-bootstrap/Container';
 
 const POPULAR_QUERY = gql`
   query allThingsQuery {
@@ -48,27 +49,33 @@ interface Creator {
   thumbnail: string;
 }
 
-const transformToThumbnailCard = (thumbnail: string): string =>
-  thumbnail.replace('_thumb_medium.jpg', '_preview_card.jpg');
-
-
 const Cards = (things: Thing[]) => {
   return things.map((thing: Thing) =>
-    <Card border={'dark'} style={{width: '60%'}}>
-      <Card.Img variant="top" src={transformToThumbnailCard(thing.thumbnail)}/>
-      <Card.Body>
-        <Card.Title>{thing.name}</Card.Title>
-        <Card.Footer>
-          <Image src={thing.creator.thumbnail} thumbnail={true}/>
-          Creator: {`${thing.creator.first_name} ${thing.creator.last_name}`}
-          <Button variant="primary">View</Button>
-        </Card.Footer>
-      </Card.Body>
-    </Card>
+    <Col sm={3} style={{paddingBottom: "10px", paddingTop: "10px"}}>
+      <Card border={'dark'} >
+        <Row className="justify-content-md-center">
+          <Image src={thing.thumbnail} thumbnail={true}/>
+        </Row>
+        <Card.Body>
+          <Card.Title>{thing.name}</Card.Title>
+          <Card.Footer>
+            <Container>
+              <Row>
+                <Col><Image src={thing.creator.thumbnail} thumbnail={true}/></Col>
+                <Col><p>{`${thing.creator.first_name} ${thing.creator.last_name}`}</p></Col>
+              </Row>
+              <Row className="justify-content-md-center">
+                <Col><Button variant="primary">View</Button></Col>
+              </Row>
+            </Container>
+          </Card.Footer>
+        </Card.Body>
+      </Card>
+    </Col>
   );
 };
 
-const PopularThings = () =>
+export const PopularThings = () =>
   <Query<ThingQuery, any> query={POPULAR_QUERY}>
     {({loading, error, data}) => {
       if (error) return <p>Error</p>;
@@ -76,20 +83,15 @@ const PopularThings = () =>
       if (data) {
         return (
           <React.Fragment>
-            <CardColumns>
-              {Cards(data!.thingQuery)}
-            </CardColumns>
+            <Container>
+              <Row>
+                {Cards(data!.thingQuery)}
+              </Row>
+            </Container>Container>
           </React.Fragment>
         );
       }
       return <div/>;
     }}
-  </Query>;
-
-export class Popular extends React.Component {
-  public render() {
-    return (
-      <PopularThings/>
-    );
-  }
-}
+  </Query>
+;
