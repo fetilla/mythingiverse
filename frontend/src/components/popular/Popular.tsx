@@ -5,12 +5,11 @@ import Image from 'react-bootstrap/Image';
 import gql from 'graphql-tag';
 import { Query } from '@apollo/react-components';
 import { Col, Row } from 'react-bootstrap';
-import './Popular.css';
 import Container from 'react-bootstrap/Container';
 
 const POPULAR_QUERY = gql`
   query allThingsQuery {
-    thingQuery {
+    things {
       id,
       name,
       thumbnail,
@@ -23,8 +22,8 @@ const POPULAR_QUERY = gql`
   }
 `;
 
-interface ThingQuery {
-  thingQuery: [Thing];
+interface Things {
+  things: [Thing];
 }
 
 interface Thing {
@@ -54,7 +53,7 @@ const Cards = (things: Thing[]) => {
     <Col sm={3} style={{paddingBottom: "10px", paddingTop: "10px"}}>
       <Card border={'dark'} >
         <Row className="justify-content-md-center">
-          <Image src={thing.thumbnail} thumbnail={true}/>
+          <Col sm={8}><Image src={thing.thumbnail} thumbnail={true}/></Col>
         </Row>
         <Card.Body>
           <Card.Title>{thing.name}</Card.Title>
@@ -76,7 +75,7 @@ const Cards = (things: Thing[]) => {
 };
 
 export const PopularThings = () =>
-  <Query<ThingQuery, any> query={POPULAR_QUERY}>
+  <Query<Things, any> query={POPULAR_QUERY}>
     {({loading, error, data}) => {
       if (error) return <p>Error</p>;
       if (loading) return <p>Loading</p>;
@@ -85,7 +84,7 @@ export const PopularThings = () =>
           <React.Fragment>
             <Container>
               <Row>
-                {Cards(data!.thingQuery)}
+                {Cards(data!.things)}
               </Row>
             </Container>Container>
           </React.Fragment>

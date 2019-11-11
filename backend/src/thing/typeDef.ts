@@ -24,7 +24,7 @@ const typeDef = gql`
   },
   
   extend type Query {
-    thingQuery: [Thing]
+    things: [Thing]
   }
 `;
 
