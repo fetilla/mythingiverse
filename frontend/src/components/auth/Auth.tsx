@@ -5,9 +5,11 @@ import { extractCodeFromUrl, ValidateToken } from './ValidateToken';
 import { observer } from 'mobx-react';
 import { AuthToken } from '../../../../backend/src/auth/AuthToken';
 import { Popular } from '../popular/Popular';
+import  history from '../../navigation/history';
 
 const AuthenticationFlow = (props: AuthToken) => {
   if (props.token) {
+    history.push('/popular');
     return <Popular/>;
   } else if (!AuthStorage.bearer_token && extractCodeFromUrl()) {
     return <ValidateToken/>;

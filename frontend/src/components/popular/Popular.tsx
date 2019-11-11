@@ -1,9 +1,11 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
 import gql from 'graphql-tag';
 import { Query } from '@apollo/react-components';
-import { CardColumns, CardDeck } from 'react-bootstrap';
+import { CardColumns } from 'react-bootstrap';
+import './Popular.css';
 
 const POPULAR_QUERY = gql`
   query allThingsQuery {
@@ -52,15 +54,15 @@ const transformToThumbnailCard = (thumbnail: string): string =>
 
 const Cards = (things: Thing[]) => {
   return things.map((thing: Thing) =>
-    <Card>
+    <Card border={'dark'} style={{width: '60%'}}>
       <Card.Img variant="top" src={transformToThumbnailCard(thing.thumbnail)}/>
       <Card.Body>
         <Card.Title>{thing.name}</Card.Title>
         <Card.Footer>
-          <Card.Img className="Card-image-footer" variant="bottom" src={thing.creator.thumbnail}/>
+          <Image src={thing.creator.thumbnail} thumbnail={true}/>
           Creator: {`${thing.creator.first_name} ${thing.creator.last_name}`}
+          <Button variant="primary">View</Button>
         </Card.Footer>
-        <Button variant="primary">View</Button>
       </Card.Body>
     </Card>
   );
