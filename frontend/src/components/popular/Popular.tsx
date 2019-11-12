@@ -9,7 +9,6 @@ import Container from 'react-bootstrap/Container';
 import ThingStorage from '../thing/ThingStorage';
 import history from '../../navigation/history';
 
-
 const POPULAR_QUERY = gql`
   query allThingsQuery {
     things {
@@ -51,7 +50,7 @@ const NavigateThing = (id: number, event: any) => {
 
 const Cards = (things: Thing[]) => {
   return things.map((thing: Thing) =>
-    <Col id={thing.id.toString()} sm={3} style={{paddingBottom: "10px", paddingTop: "10px"}}>
+    <Col id={thing.id.toString()} sm={3} style={{paddingBottom: "10px", paddingTop: "10px", textAlign: "center"}}>
       <Card border={'dark'} >
         <Row className="justify-content-md-center">
           <Col sm={8}><Image src={thing.thumbnail} thumbnail={true}/></Col>
@@ -60,7 +59,7 @@ const Cards = (things: Thing[]) => {
           <Card.Title>{thing.name}</Card.Title>
           <Card.Footer>
             <Container>
-              <Row>
+              <Row className="justify-content-md-center">
                 <Col><Image src={thing.creator.thumbnail} thumbnail={true}/></Col>
                 <Col><p>{`${thing.creator.first_name} ${thing.creator.last_name}`}</p></Col>
               </Row>
