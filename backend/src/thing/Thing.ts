@@ -19,7 +19,7 @@ export interface ThingId {
   id: number;
 }
 
-export interface Thing extends ThingId{
+export interface Thing extends ThingId {
   name: string;
   url: string;
   public_url: string;

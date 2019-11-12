@@ -1,16 +1,15 @@
 import { gql, IExecutableSchemaDefinition } from 'apollo-server';
 import { isArray, mergeWith } from 'lodash';
-import  thingResolvers  from './thing/resolvers';
-import  dateResolvers from './utils/scalars/date/resolvers';
-import  authResolvers  from './auth/resolvers';
+import thingResolvers from './thing/resolvers';
+import dateResolvers from './utils/scalars/date/resolvers';
+import authResolvers from './auth/resolvers';
 
 // create our schema
-function withArraysConcatenation(objValue:any, srcValue:any) {
+function withArraysConcatenation(objValue: any, srcValue: any) {
   // if an array, concat it
   if (isArray(objValue)) {
     return objValue.concat(srcValue);
   }
-  // use the normal lodash merge functionality
 }
 
 // allows us to merge schemas
@@ -18,7 +17,6 @@ export const mergeRawSchemas = (...schemas: IExecutableSchemaDefinition[]):
   IExecutableSchemaDefinition => {
   return mergeWith({}, ...schemas, withArraysConcatenation);
 };
-
 
 export const rawSchemas = mergeRawSchemas(
   {

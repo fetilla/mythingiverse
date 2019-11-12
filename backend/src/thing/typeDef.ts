@@ -10,14 +10,13 @@ const typeDef = gql`
     public_url: String,
     thumbnail: String
   }
-  
+
   type DefaultImage {
     id: ID,
     url: String,
     name: String,
     added: Date,
   }
-
 
   type Thing {
     id: ID,
@@ -30,7 +29,7 @@ const typeDef = gql`
     is_purchased: Boolean,
     is_published: Boolean,
   }
-  
+
   type ThingDetail {
     id: ID,
     name: String,
@@ -60,7 +59,7 @@ const typeDef = gql`
     download_count: Int,
     view_count: Int,
   }
-  
+
   extend type Query {
     things: [Thing],
     thingDetailById(id: Int!): ThingDetail,

@@ -7,7 +7,7 @@ export default {
     Query: {},
     Mutation: {
        validateCodeGetToken: (parent, args: AuthToken, {}) => {
-        return validateCodeGetToken(args.token)
+        return validateCodeGetToken(args.token);
       },
     },
   },

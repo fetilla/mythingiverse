@@ -6,14 +6,14 @@ const resolverDate = {
     name: 'Date',
     description: 'Date custom scalar type',
     parseValue(value) {
-      return new Date(value); // value from the client
+      return new Date(value);
     },
     serialize(value) {
-      return new Date(value); // value sent to the client
+      return new Date(value);
     },
     parseLiteral(ast) {
       if (ast.kind === Kind.INT) {
-        return new Date(ast.value) // ast value is always in string format
+        return new Date(ast.value);
       }
       return null;
     },

@@ -4,6 +4,7 @@
   "description": "Backend server to mythingiverse application",
   "main": "dist/server.js",
   "scripts": {
+    "tslint": "tslint --project .",
     "build-ts": "tsc",
     "start": "npm run serve",
     "start-dev": "tsc && node dist/app.js",

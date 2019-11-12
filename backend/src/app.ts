@@ -5,11 +5,11 @@ import { makeExecutableSchema } from 'graphql-tools';
 const schemas = makeExecutableSchema(graphqlSchemas);
 
 const apolloConfig: Config = {
-  schema: schemas,
   context: ({ req }) => {
     const token = req.headers.authorization || '';
     return { token };
-  }
+  },
+  schema: schemas,
 };
 
 const server = new ApolloServer(apolloConfig);
