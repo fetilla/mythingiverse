@@ -62,7 +62,7 @@ const typeDef = gql`
 
   extend type Query {
     things: [Thing],
-    thingDetailById(id: Int!): ThingDetail,
+    thingDetailById(id: String!): ThingDetail,
   }
 `;
 
