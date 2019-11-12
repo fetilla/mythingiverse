@@ -16,7 +16,7 @@ const AuthenticationFlow = (props: AuthToken) => {
   } else {
     return <RedirectAuth />;
   }
-}
+};
 
 @observer
 export class Auth extends Component {

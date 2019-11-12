@@ -80,7 +80,7 @@ const ThingDetails = (thing: ThingDetails) => {
         </Col>
       </Row>
       <Row>
-        <Col sm={8}><Image fluid src={thing.default_image.url}/></Col>
+        <Col sm={8}><Image fluid={true} src={thing.default_image.url}/></Col>
         <Col sm={4}>
           <ListGroup>
             <ListGroup.Item className="float-right" variant="secondary">Views {thing.view_count}</ListGroup.Item>
@@ -102,7 +102,7 @@ const ThingDetails = (thing: ThingDetails) => {
       </Row>
       <Row>
         <Col>
-          <div className="content" dangerouslySetInnerHTML={{__html: thing.description_html}}></div>
+          <div className="content" dangerouslySetInnerHTML={{__html: thing.description_html}}/>
         </Col>
       </Row>
     </Container>
@@ -110,8 +110,8 @@ const ThingDetails = (thing: ThingDetails) => {
 }
 
 export const ThingDetailsQuery = () => {
-    console.log('test' + ThingStorage.id);
-    return <Query<ThingDetailByIdResponse, ThingId> variables={{id: ThingStorage.id}} query={THING_DETAIL}>
+    return (
+      <Query<ThingDetailByIdResponse, ThingId> variables={{id: ThingStorage.id}} query={THING_DETAIL}>
       {({loading, error, data}) => {
         if (error) return <p>Error</p>;
         if (loading) return <p>Loading</p>;
@@ -120,6 +120,5 @@ export const ThingDetailsQuery = () => {
         }
         return <div/>;
       }}
-    </Query>
-  }
-;
+    </Query>)
+  };

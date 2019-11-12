@@ -1,4 +1,5 @@
 {
+  "extends": ["tslint-react"],
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
@@ -8,6 +9,7 @@
   },
   "rules": {
     "ordered-imports": [false],
-    "object-literal-sort-keys": [false]
+    "object-literal-sort-keys": [false],
+    "jsx-no-multiline-js": [false]
   }
 }

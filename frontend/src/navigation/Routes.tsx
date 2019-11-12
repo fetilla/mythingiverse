@@ -5,26 +5,35 @@ import AuthStorage from '../components/auth/AuthStorage';
 import { PopularThings } from '../components/popular/Popular';
 import { ThingDetailsQuery } from '../components/thing/Thing';
 
-const PrivateRoute = (props: any) => <Route path={props.path} render={() => {
-  return AuthStorage.bearer_token ?
-    (props.children) :
-    (<Redirect to={'/'}/>)
-}} />;
+function BearerCheckToRedirect(props: any) {
+  return () => {
+    return AuthStorage.bearer_token ?
+      (props.children) :
+      (<Redirect to={'/'} />)
+  };
+}
+
+const PrivateRoute = (props: any) => (
+  <Route
+    path={props.path}
+    render={BearerCheckToRedirect(props)}
+  />
+    );
 
 export default function Routes() {
   return (
     <Switch>
       <PrivateRoute path={'/popular'}>
-        <PopularThings />
+        <PopularThings/>
       </PrivateRoute>
       <PrivateRoute path={'/thing'}>
-        <ThingDetailsQuery />
+        <ThingDetailsQuery/>
       </PrivateRoute>
       <Route path={AuthStorage.redirect_uri}>
-        <Auth />
+        <Auth/>
       </Route>
       <Route exact={true} path={'/'}>
-        <Auth />
+        <Auth/>
       </Route>
     </Switch>
   );

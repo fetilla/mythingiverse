@@ -48,9 +48,13 @@ const NavigateThing = (id: number, event: any) => {
 };
 
 
+const handleOnClick = (thing: Thing) => {
+  return (event: any) => NavigateThing(thing.id, event);
+};
+
 const Cards = (things: Thing[]) => {
-  return things.map((thing: Thing) =>
-    <Col id={thing.id.toString()} sm={3} style={{paddingBottom: "10px", paddingTop: "10px", textAlign: "center"}}>
+  return things.map((thing: Thing) => (
+    <Col key={thing.id.toString()} sm={3} style={{paddingBottom: "10px", paddingTop: "10px", textAlign: "center"}}>
       <Card border={'dark'} >
         <Row className="justify-content-md-center">
           <Col sm={8}><Image src={thing.thumbnail} thumbnail={true}/></Col>
@@ -64,17 +68,17 @@ const Cards = (things: Thing[]) => {
                 <Col><p>{`${thing.creator.first_name} ${thing.creator.last_name}`}</p></Col>
               </Row>
               <Row className="justify-content-md-center">
-                <Col><Button onClick={(event: any) => NavigateThing(thing.id, event)} variant="primary">View</Button></Col>
+                <Col><Button onClick={handleOnClick(thing)} variant="primary">View</Button></Col>
               </Row>
             </Container>
           </Card.Footer>
         </Card.Body>
       </Card>
-    </Col>
+    </Col>)
   );
 };
 
-export const PopularThings = () =>
+export const PopularThings = () => (
   <Query<Things, any> query={POPULAR_QUERY}>
     {({loading, error, data}) => {
       if (error) return <p>Error</p>;
@@ -92,5 +96,4 @@ export const PopularThings = () =>
       }
       return <div/>;
     }}
-  </Query>
-;
+  </Query>);

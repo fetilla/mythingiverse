@@ -12,7 +12,8 @@ const navigatePopular = () => {
 @observer
 export class Header extends React.Component {
   public render() {
-    let navbar = <Navbar bg="dark" expand="lg">
+    return (
+      <Navbar bg="dark" expand="lg">
       {(AuthStorage.bearer_token) ?
         (<Nav.Link href="/popular">Popular</Nav.Link>)
         : (null)
@@ -20,7 +21,6 @@ export class Header extends React.Component {
       <Col md={{ span: 4, offset: 4 }}><Navbar.Text>
         My thingiverse
       </Navbar.Text></Col>
-    </Navbar>;
-    return navbar;
+    </Navbar>);
   }
 }

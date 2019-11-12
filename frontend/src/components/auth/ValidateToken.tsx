@@ -20,9 +20,10 @@ interface AuthToken {
   validateCodeGetToken: ValidateCodeGetToken;
 }
 
-
-const ValidateToken = () => <Mutation<AuthToken, ValidateCodeGetToken> mutation={VALIDATE_TOKEN_MUTATION}>
-  {(authToken, { loading, data, error }) => {
+const ValidateToken = () => (
+  <Mutation<AuthToken, ValidateCodeGetToken> mutation={VALIDATE_TOKEN_MUTATION}>
+  {
+    (authToken, { loading, data, error }) => {
     if(loading) return <p>Authentication in process...</p>;
     if(error) return <p>Error authentication</p>;
     if(!data){
@@ -32,11 +33,11 @@ const ValidateToken = () => <Mutation<AuthToken, ValidateCodeGetToken> mutation=
     }
     return null;
   }}
-</Mutation>
+</Mutation>);
 
 const extractCodeFromUrl = () => {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get('code');
-}
+};
 
 export {extractCodeFromUrl, ValidateToken};
