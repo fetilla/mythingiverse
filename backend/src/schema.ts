@@ -23,20 +23,20 @@ export const mergeRawSchemas = (...schemas: IExecutableSchemaDefinition[]):
 export const rawSchemas = mergeRawSchemas(
   {
     typeDefs: [
-      // we create empty main types, we can later extend them in the shards
+      // we create empty main types, we can later extend them in specific resolvers
       gql`
-                type Query {
-                    _empty: String
-                }
+        type Query {
+            _empty: String
+        }
 
-                type Mutation {
-                    _empty: String
-                }
+        type Mutation {
+            _empty: String
+        }
 
-                type Subscription {
-                    _empty: String
-                }
-            `,
+        type Subscription {
+            _empty: String
+        }
+      `,
     ],
     resolvers: {},
   },

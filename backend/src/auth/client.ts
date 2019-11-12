@@ -1,4 +1,3 @@
-import * as httpm from 'typed-rest-client/HttpClient';
 import { AuthToken } from './AuthToken';
 import { contentTypeUrlEncodedHeader, httpClient, objectToURLEncoded } from '../utils/httpUtils';
 
@@ -23,10 +22,10 @@ export const validateCodeGetToken = async (code: string): Promise<AuthToken> => 
   return {token: extractToken(body)};
 }
 
-const extractToken = (body: string): string => {
-  return body.includes('access_token') ?
-    body.split('&').find((responseElements) => responseElements.includes('access_token'))
+const extractToken = (body: string): string | never => {
+  if (body.includes('access_token')) {
+    return body.split('&').find((responseElements) => responseElements.includes('access_token'))
       .split('=').find((tokenPart) => tokenPart !== 'access_token')
-    : body;
-
+  }
+  throw new Error('The token cannot be validated.');
 }
