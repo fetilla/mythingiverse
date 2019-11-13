@@ -6,6 +6,7 @@ Ensure the following software has been installed in your local machine:
 
 - **Yarn** - https://yarnpkg.com/lang/en/docs/install/#windows-stable
 - **Npm** - https://www.npmjs.com/get-npm 
+- **Node** - https://nodejs.org/es/download/ 
 
 ## Start up
 
