@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Auth } from '../components/auth/Auth';
-import AuthStorage from '../components/auth/AuthStorage';
+import AuthStorage from '../components/auth/Auth.storage';
 import { PopularThings } from '../components/popular/Popular';
 import { ThingDetailsQuery } from '../components/thing/Thing';
 

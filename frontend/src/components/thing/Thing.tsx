@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import { Query } from '@apollo/react-components';
 import React from 'react';
 import Container from 'react-bootstrap/Container';
-import { Col, FormControl, ListGroup, Row, Form } from 'react-bootstrap';
+import { Col, ListGroup, Row } from 'react-bootstrap';
 import ThingStorage from './ThingStorage';
 import Image from 'react-bootstrap/Image';
 import { formatToDateString } from '../../utils/dateUtils';
@@ -35,41 +35,6 @@ const THING_DETAIL = gql`
     }
   }
 `;
-
-interface ThingId {
-  id: number;
-}
-
-interface DefaultImage {
-  url: string;
-}
-
-interface Creator {
-  first_name: string;
-  last_name: string;
-  thumbnail: string;
-}
-
-interface ThingDetails extends ThingId {
-  name: string;
-  thumbnail: string;
-  creator: Creator;
-  added: Date;
-  modified: Date;
-  license: string;
-  like_count: number;
-  default_image: DefaultImage;
-  description_html: string;
-  details: string;
-  file_count: number;
-  layout_count: number;
-  download_count: number;
-  view_count: number;
-}
-
-interface ThingDetailByIdResponse {
-  thingDetailById: ThingDetails
-}
 
 const ThingDetails = (thing: ThingDetails) => {
   return (

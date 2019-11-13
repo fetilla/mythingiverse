@@ -3,7 +3,7 @@ import './Header.css';
 import history from '../../navigation/history';
 import { observer } from 'mobx-react';
 import { Navbar, Nav, Col } from 'react-bootstrap';
-import AuthStorage from '../auth/AuthStorage';
+import AuthStorage from '../auth/Auth.storage';
 
 const navigatePopular = () => {
   history.push('/popular');

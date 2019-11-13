@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import AuthStorage from './AuthStorage';
+import AuthStorage from './Auth.storage';
 import { RedirectAuth } from './RedirectAuth';
 import { extractCodeFromUrl, ValidateToken } from './ValidateToken';
 import { observer } from 'mobx-react';
-import { AuthToken } from '../../../../backend/src/auth/AuthToken';
-import { PopularThings } from '../popular/Popular';
-import  history from '../../navigation/history';
-import { Redirect, Route } from 'react-router';
+import { Redirect } from 'react-router';
+import { AuthToken } from './Auth.interfaces';
 
 const AuthenticationFlow = (props: AuthToken) => {
   if (props.token) {

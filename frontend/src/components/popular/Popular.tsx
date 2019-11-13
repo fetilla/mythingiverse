@@ -24,23 +24,6 @@ const POPULAR_QUERY = gql`
   }
 `;
 
-interface Things {
-  things: [Thing];
-}
-
-interface Thing {
-  id: number;
-  name: string;
-  thumbnail: string;
-  creator: Creator;
-}
-
-interface Creator {
-  first_name: string;
-  last_name: string;
-  thumbnail: string;
-}
-
 const NavigateThing = (id: number, event: any) => {
   event.preventDefault();
   ThingStorage.id = id;

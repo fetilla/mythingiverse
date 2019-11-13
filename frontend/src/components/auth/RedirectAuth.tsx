@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthStorage from './AuthStorage';
+import AuthStorage from './Auth.storage';
 
 export const RedirectAuth = () => {
   window.location.assign(

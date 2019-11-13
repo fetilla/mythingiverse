@@ -6,7 +6,7 @@ import history from './navigation/history';
 import Routes from './navigation/Routes';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
-import AuthStorage from './components/auth/AuthStorage';
+import AuthStorage from './components/auth/Auth.storage';
 
 export const client = new ApolloClient({
   uri: 'http://localhost:4000',

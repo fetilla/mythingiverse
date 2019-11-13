@@ -1,8 +1,8 @@
 import { Mutation } from '@apollo/react-components';
-import AuthStorage from './AuthStorage';
+import AuthStorage from './Auth.storage';
 import React from 'react';
 import gql from 'graphql-tag';
-import history  from '../../navigation/history'
+import { ValidateCodeGetToken, AuthToken } from './Auth.interfaces';
 
 const VALIDATE_TOKEN_MUTATION = gql`
   mutation validateCodeGetToken($token: String!) {
@@ -12,16 +12,8 @@ const VALIDATE_TOKEN_MUTATION = gql`
   }
 `;
 
-interface ValidateCodeGetToken {
-  token: string;
-}
-
-interface AuthToken {
-  validateCodeGetToken: ValidateCodeGetToken;
-}
-
 const ValidateToken = () => (
-  <Mutation<AuthToken, ValidateCodeGetToken> mutation={VALIDATE_TOKEN_MUTATION}>
+  <Mutation<ValidateCodeGetToken, AuthToken> mutation={VALIDATE_TOKEN_MUTATION}>
   {
     (authToken, { loading, data, error }) => {
     if(loading) return <p>Authentication in process...</p>;
